@@ -1,11 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-
+import Header from './core/Header';
+import Footer from './core/Footer';
 
 ReactDOM.render(
-  <React.StrictMode>
+  <div>
+    <Header />
     <App />
-  </React.StrictMode>,
+    <Footer />
+  </div>,
   document.getElementById('root')
 );
