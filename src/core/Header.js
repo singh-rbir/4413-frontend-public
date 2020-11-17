@@ -2,14 +2,6 @@ import React, {Fragment} from "react";
 import logo from '../images/logo.png';
 import {Link} from "react-router-dom";
 
-/*const isActive = (history, path) => {
-    if(history.location.pathname === path) {
-        return {color: 'black'};
-    } else {
-        return {color: "white"};
-    }
-};*/
-
 const Header = () => {
     return (<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
   <h2 class="my-0 mr-md-auto font-weight-normal"><img className="mb-4 col-20" style={{borderRadius: "60%"}} src={logo} alt="" width="72" height="72" />Book<span style={{color: "red"}}>Store</span></h2>
