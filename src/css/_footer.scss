@@ -1,0 +1,22 @@
+.footer {
+  margin-bottom: 0px;
+  .row {
+    width: 100%;
+    .col-md {
+      text-align: center;
+      p {
+        font-size: 20px;
+      }
+    }
+    .col-6 {
+      padding-left: 0px;
+    }
+  }
+  .credits {
+    display: flex;
+    justify-content: center;
+    img {
+      margin-right: 10px;
+    }
+  }
+}
