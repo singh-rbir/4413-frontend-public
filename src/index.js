@@ -1,14 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
 import App from './App';
-import Header from './core/Header';
-import Footer from './core/Footer';
+import './css/app.scss';
+import 'bootstrap/dist/css/bootstrap.css';
 
 ReactDOM.render(
-  <div>
-    <Header />
-    <App />
-    <Footer />
-  </div>,
+  <React.StrictMode>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </React.StrictMode>,
   document.getElementById('root')
 );
