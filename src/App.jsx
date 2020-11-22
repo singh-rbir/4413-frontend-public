@@ -14,7 +14,7 @@ function App() {
   return (
     <>
       <Header />
-      <div className="container">
+      <div className="app__container">
         <Switch>
           <Route path="/shop" component={Shop} />
           <Route path="/profile" component={Profile} />
