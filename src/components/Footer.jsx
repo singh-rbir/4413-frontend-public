@@ -41,7 +41,7 @@ const Footer = () => {
       <div class="col-12 col-md credits">
         <img class="mb-2" src={logo} alt="" width="24" height="24" />
         <small class="d-block mb-3 text-muted">
-          ©Rushil, Aman, Rajbhir 4413
+          © Rushil, Aman, Rajanbir 4413
         </small>
       </div>
     </footer>
