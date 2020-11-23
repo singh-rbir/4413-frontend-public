@@ -5,16 +5,27 @@ const Signup = () => {
     <div className="text-center mh-100">
       <form className="form-signin">
         <h1 className="h3 mb-3 font-weight-normal">Signup Page</h1>
-        <label for="inputEmail" className="sr-only">
-          Name
+        <label for="inputFirstName" className="sr-only">
+          First name
         </label>
         <input
           type="text"
-          id="inputEmail"
+          id="inputFirstName"
           className="form-control"
-          placeholder="Name"
+          placeholder="First name"
           required=""
-          autofocus=""
+          autoFocus={true}
+        />
+        <label for="inputLastName" className="sr-only">
+          Last name
+        </label>
+        <input
+          type="text"
+          id="inputLastName"
+          className="form-control"
+          placeholder="Last name"
+          required=""
+          autoFocus=""
         />
         <label for="inputEmail" className="sr-only">
           Email address
@@ -25,7 +36,7 @@ const Signup = () => {
           className="form-control"
           placeholder="Email address"
           required=""
-          autofocus=""
+          autoFocus=""
         />
         <label for="inputPassword" className="sr-only">
           Password

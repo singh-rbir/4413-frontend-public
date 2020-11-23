@@ -30,12 +30,12 @@ const Header = () => {
         </h5>
         <h5 className="mr-4">
           <Link className="p-2 text-dark" to="/signin">
-            Signin
+            Sign-in
           </Link>
         </h5>
         <h5 className="mr-4">
           <Link className="p-2 text-dark" to="/signup">
-            Sigup
+            Sign-up
           </Link>
         </h5>
         <h5 className="mr-4">
