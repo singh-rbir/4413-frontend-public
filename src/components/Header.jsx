@@ -1,47 +1,56 @@
 import React from 'react';
 import logo from '../images/logo.png';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { FiShoppingCart } from 'react-icons/fi';
 const Header = () => {
   return (
-    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm header">
-      <h2 class="my-0 mr-md-auto font-weight-normal logo">
-        <Link to="/" style={{ textDecoration: 'none', color: 'black' }}>
+    <div className="d-flex flex-column flex-md-row align-items-center p-3 px-md-4  bg-white border-bottom shadow-sm header">
+      <h2 className="my-0 mr-md-auto font-weight-normal logo">
+        <NavLink
+          activeClassName="is-active"
+          to="/"
+          style={{ textDecoration: 'none', color: 'black' }}
+        >
           <img className="mb-4 col-20" src={logo} alt="logo" />
           Book<span>Store</span>
-        </Link>
+        </NavLink>
       </h2>
-      <nav class="my-2 my-md-0 mr-md-3 header__list">
+      <nav className="my-2 my-md-0 mr-md-3 header__list">
         <h5 className="mr-4">
-          <Link className="p-2 text-dark" to="/">
+          <NavLink
+            exact={true}
+            activeClassName="is-active"
+            className="p-2 "
+            to="/"
+          >
             Home
-          </Link>
+          </NavLink>
         </h5>
         <h5 className="mr-4">
-          <Link className="p-2 text-dark" to="/shop">
+          <NavLink activeClassName="is-active" className="p-2" to="/shop">
             Shop
-          </Link>
+          </NavLink>
         </h5>
 
         <h5 className="mr-4">
-          <Link className="p-2 text-dark" to="/profile">
+          <NavLink activeClassName="is-active" className="p-2" to="/profile">
             Profile
-          </Link>
+          </NavLink>
         </h5>
         <h5 className="mr-4">
-          <Link className="p-2 text-dark" to="/signin">
-            Sign-in
-          </Link>
+          <NavLink activeClassName="is-active" className="p-2" to="/signin">
+            SignIn
+          </NavLink>
         </h5>
         <h5 className="mr-4">
-          <Link className="p-2 text-dark" to="/signup">
-            Sign-up
-          </Link>
+          <NavLink activeClassName="is-active" className="p-2" to="/signup">
+            SignUp
+          </NavLink>
         </h5>
         <h5 className="mr-4">
-          <Link className="p-2 text-dark" to="/cart">
+          <NavLink activeClassName="is-active" className="p-2" to="/cart">
             <FiShoppingCart className="cart" />
-          </Link>
+          </NavLink>
         </h5>
       </nav>
     </div>

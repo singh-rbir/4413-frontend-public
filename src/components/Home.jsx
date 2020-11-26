@@ -1,5 +1,8 @@
 import React from 'react';
 import { MdLocalShipping } from 'react-icons/md';
+import { AiFillGift } from 'react-icons/ai';
+import { HiOutlineChatAlt2 } from 'react-icons/hi';
+import { GoCreditCard } from 'react-icons/go';
 import reading_time from '../images/reading_time.svg';
 
 function Home() {
@@ -19,6 +22,21 @@ function Home() {
           <MdLocalShipping className="icon" />
           <p className="service__heading">Free Shipping</p>
           <p className="service__subheading">Delivery in one Day</p>
+        </div>
+        <div className="service__item">
+          <AiFillGift className="icon" />
+          <p className="service__heading">Gifts and Sales</p>
+          <p className="service__subheading">Gift with every order</p>
+        </div>
+        <div className="service__item">
+          <HiOutlineChatAlt2 className="icon" />
+          <p className="service__heading">Online Support</p>
+          <p className="service__subheading">Online Support 24/7</p>
+        </div>
+        <div className="service__item">
+          <GoCreditCard className="icon" />
+          <p className="service__heading">Secure Payment</p>
+          <p className="service__subheading">Fast and secure payments</p>
         </div>
       </div>
     </>

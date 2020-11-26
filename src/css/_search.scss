@@ -1,0 +1,36 @@
+.search__bar {
+  width: auto;
+  padding: 0px 260px;
+  margin-top: 40px;
+  position: relative;
+  .search__bar__input {
+    input {
+      display: block;
+      width: 100% !important;
+      padding: 4px 32.5px;
+      height: 50px;
+      line-height: 20px;
+      overflow: visible;
+      color: #303336;
+      border: 0;
+      border: 0.4px solid rgb(218, 218, 218);
+      border-radius: 4px;
+      margin-right: 20px;
+    }
+    input:focus {
+      outline-offset: 0px !important;
+      outline: none !important;
+      padding: 4px 32.5px;
+    }
+    .search_logo {
+      overflow: hidden;
+      position: absolute;
+      top: 17px;
+      left: 270px;
+      display: block;
+      text-align: center;
+      pointer-events: none;
+      color: #959da5;
+    }
+  }
+}

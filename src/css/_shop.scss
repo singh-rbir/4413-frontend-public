@@ -1,0 +1,30 @@
+@import '_variables';
+.image__container {
+  height: 200px;
+  .book__cover {
+    object-fit: cover;
+    width: 100%;
+    height: 200px;
+  }
+}
+.shop__container {
+  margin-top: 100px;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  .category__container {
+    text-align: left;
+    .category__list {
+      padding: 0;
+      text-align: left;
+      li {
+        font-size: 18px;
+        list-style: none;
+      }
+      li:hover {
+        cursor: pointer;
+        color: $secondary-color;
+      }
+    }
+  }
+}

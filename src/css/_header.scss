@@ -1,6 +1,11 @@
 @import '_variables';
 
 .header {
+  margin: 0px !important;
+  top: 0;
+  width: 100%;
+  overflow: hidden;
+  position: sticky;
   .logo {
     img {
       width: 42px;
@@ -8,7 +13,7 @@
       margin-bottom: 3px !important;
     }
     span {
-      color: $red;
+      color: $secondary-color;
     }
   }
 
@@ -17,7 +22,12 @@
       display: inline-block;
       .cart {
         font-size: 25px;
-        color: $red;
+      }
+      a {
+        color: $primary-color;
+      }
+      .is-active {
+        color: $secondary-color;
       }
     }
   }
