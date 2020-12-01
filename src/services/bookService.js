@@ -9,3 +9,9 @@ export async function getAllCategory() {
 export async function getBooks(pageno) {
   return http.get(`${apiEndpoint}/getAllBooks?pageno=${pageno}`);
 }
+
+export async function getByCategory(category, pageno) {
+  return http.get(
+    `${apiEndpoint}/findByCategory?category=${category}&pageno=${pageno}`
+  );
+}

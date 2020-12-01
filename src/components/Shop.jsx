@@ -3,9 +3,11 @@ import bookCover from '../images/book_cover.jpg';
 import Search from './common/search';
 import StarRatings from 'react-star-ratings';
 import * as bookService from '../services/bookService';
+import { Link } from 'react-router-dom';
 
 class Shop extends Component {
   state = {
+    category: 'All',
     categories: [],
     pageCounter: 1,
     books: [],
@@ -19,14 +21,25 @@ class Shop extends Component {
   async getBooks(pageNo) {
     if (pageNo > 0) {
       const books = await bookService.getBooks(pageNo);
-
       this.setState({ books: books.data });
       this.setState({ pageCounter: pageNo });
     }
   }
 
+  async getBooksByCategory(category, pageNo) {
+    let books = [];
+    if (category === 'All') {
+      books = await bookService.getBooks(pageNo);
+    } else {
+      books = await bookService.getByCategory(category, pageNo);
+    }
+    this.setState({ pageCounter: pageNo });
+    this.setState({ category });
+    this.setState({ books: books.data });
+  }
+
   render() {
-    const { categories, pageCounter, books } = this.state;
+    const { categories, pageCounter, books, category } = this.state;
     return (
       <>
         <div className="image__container">
@@ -37,8 +50,16 @@ class Shop extends Component {
           <div className="category__container">
             <h3>Categories</h3>
             <ul className="category__list">
+              <li onClick={() => this.getBooksByCategory('All', 1)}>
+                All Categories
+              </li>
               {categories.map((data) => (
-                <li key={categories.indexOf(data)}>{data}</li>
+                <li
+                  key={categories.indexOf(data)}
+                  onClick={() => this.getBooksByCategory(data, 1)}
+                >
+                  {data}
+                </li>
               ))}
             </ul>
           </div>
@@ -47,10 +68,18 @@ class Shop extends Component {
               <Search />
               {/* Buttons to toggle between 10 books at a time*/}
               <div className="page__btn">
-                <button onClick={() => this.getBooks(pageCounter + 1)}>
+                <button
+                  onClick={() =>
+                    this.getBooksByCategory(category, pageCounter + 1)
+                  }
+                >
                   Next
                 </button>
-                <button onClick={() => this.getBooks(pageCounter - 1)}>
+                <button
+                  onClick={() =>
+                    this.getBooksByCategory(category, pageCounter - 1)
+                  }
+                >
                   Prev
                 </button>
               </div>
@@ -60,14 +89,18 @@ class Shop extends Component {
               {books.map((data) => (
                 <div className="book" key={books.indexOf(data)}>
                   <div className="left__container">
-                    <img
-                      src={data.images}
-                      alt={data.title}
-                      className="book__img"
-                    />
+                    <Link to="/book">
+                      <img
+                        src={data.images}
+                        alt={data.title}
+                        className="book__img"
+                      />
+                    </Link>
                   </div>
                   <div className="right__container">
-                    <p className="title">{data.title}</p>
+                    <Link to="/book">
+                      <p className="title">{data.title}</p>
+                    </Link>
                     <p className="author">{data.author}</p>
                     <div className="price">
                       Price: {'    '}
@@ -85,17 +118,27 @@ class Shop extends Component {
                     </div>
                     <p className="format">{data.format}</p>
                     <button className="addtocart">Add To Cart</button>
-                    <button className="view">View</button>
+                    <Link to="/book">
+                      <button className="view">View</button>
+                    </Link>
                   </div>
                 </div>
               ))}
             </div>
             <div className="controls controls_bottom">
               <div className="page__btn">
-                <button onClick={() => this.getBooks(pageCounter + 1)}>
+                <button
+                  onClick={() =>
+                    this.getBooksByCategory(category, pageCounter + 1)
+                  }
+                >
                   Next
                 </button>
-                <button onClick={() => this.getBooks(pageCounter - 1)}>
+                <button
+                  onClick={() =>
+                    this.getBooksByCategory(category, pageCounter - 1)
+                  }
+                >
                   Prev
                 </button>
               </div>
