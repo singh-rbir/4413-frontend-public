@@ -28,14 +28,16 @@ class Shop extends Component {
 
   async getBooksByCategory(category, pageNo) {
     let books = [];
-    if (category === 'All') {
-      books = await bookService.getBooks(pageNo);
-    } else {
-      books = await bookService.getByCategory(category, pageNo);
+    if (pageNo > 0) {
+      if (category === 'All') {
+        books = await bookService.getBooks(pageNo);
+      } else {
+        books = await bookService.getByCategory(category, pageNo);
+      }
+      this.setState({ pageCounter: pageNo });
+      this.setState({ category });
+      this.setState({ books: books.data });
     }
-    this.setState({ pageCounter: pageNo });
-    this.setState({ category });
-    this.setState({ books: books.data });
   }
 
   render() {
@@ -89,7 +91,7 @@ class Shop extends Component {
               {books.map((data) => (
                 <div className="book" key={books.indexOf(data)}>
                   <div className="left__container">
-                    <Link to="/book">
+                    <Link to={{ pathname: '/book', state: { book: data } }}>
                       <img
                         src={data.images}
                         alt={data.title}
@@ -98,7 +100,7 @@ class Shop extends Component {
                     </Link>
                   </div>
                   <div className="right__container">
-                    <Link to="/book">
+                    <Link to={{ pathname: '/book', state: { book: data } }}>
                       <p className="title">{data.title}</p>
                     </Link>
                     <p className="author">{data.author}</p>
@@ -118,7 +120,7 @@ class Shop extends Component {
                     </div>
                     <p className="format">{data.format}</p>
                     <button className="addtocart">Add To Cart</button>
-                    <Link to="/book">
+                    <Link to={{ pathname: '/book', state: { book: data } }}>
                       <button className="view">View</button>
                     </Link>
                   </div>
