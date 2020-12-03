@@ -1,43 +1,79 @@
 import React from 'react';
+import Joi from 'joi';
+import Form from './common/form';
+import * as userService from '../services/userService';
+import { ToastContainer, toast } from 'react-toastify';
+class SignIn extends Form {
+  state = {
+    data: { email: '', password: '' },
+    errors: {},
+  };
 
+  schema = {
+    email: Joi.string().required().email().label('Email'),
+    password: Joi.string().required().label('Password'),
+  };
 
-const Signin = () => {
-  return (
-    <div className="text-center mh-100">
-      <form className="form-signin">
-        <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
-        <label for="inputEmail" className="sr-only">
-          Email address
-        </label>
-        <input
-          type="email"
-          id="inputEmail"
-          className="form-control"
-          placeholder="Email address"
-          required=""
-          autofocus=""
-        />
-        <label for="inputPassword" className="sr-only">
-          Password
-        </label>
-        <input
-          type="password"
-          id="inputPassword"
-          className="form-control"
-          placeholder="Password"
-          required=""
-        />
-        <div className="checkbox mb-3">
-          <label>
-            <input type="checkbox" value="remember-me" /> Remember me
-          </label>
-        </div>
-        <button className="btn btn-lg btn-primary btn-block" type="submit">
-          Sign in
-        </button>
-      </form>
-    </div>
-  );
-};
+  doSubmit = async () => {
+    try {
+      const { email, password } = this.state.data;
+      const result = await userService.login(email, password);
+      if (result.status === 0) {
+        localStorage.setItem('user', JSON.stringify(result));
+        window.location = '/';
+      } else {
+        toast.error(`${result.message}`, {
+          position: 'top-center',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+    } catch (ex) {
+      if (ex.response && ex.response.status === 400) {
+        const errors = { ...this.state.errors };
+        errors.email = ex.response.data;
+        this.setState({ errors });
+      }
+    }
+  };
 
-export default Signin;
+  render() {
+    //  if (authService.getCurrentUser()) return <Redirect to="/" />;
+
+    return (
+      <div className="signup__form">
+        {/* <div className='form__header'>
+            <p>Sign up for free to start catching bugs.</p>
+            <button className='google_btn'>SIGN UP WITH GOOGLE</button>
+          </div>
+          <hr /> */}
+        <form onSubmit={this.handleSubmit}>
+          <div className="form__body">
+            <p>Sign in with your email address</p>
+            {this.renderInput('email', 'Enter your Email')}
+            {this.renderInput('password', 'Enter your Password', 'password')}
+            {this.renderButton('SIGN IN')}
+            <ToastContainer
+              position="top-center"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              className="notification"
+            />
+          </div>
+        </form>
+      </div>
+    );
+  }
+}
+
+export default SignIn;

@@ -15,6 +15,7 @@
   .category__container {
     text-align: left;
     .category__list {
+      margin-top: 60px;
       padding: 0;
       text-align: left;
       li {
@@ -24,6 +25,94 @@
       li:hover {
         cursor: pointer;
         color: $secondary-color;
+      }
+    }
+  }
+  .books__container {
+    width: 60%;
+    .controls {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      .page__btn {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-between;
+        align-self: center;
+        margin-top: 5px;
+        margin-bottom: 60px;
+        button {
+          border: 0;
+          border-radius: 4px;
+          font-size: 20px;
+          padding: 6px 30px;
+          margin-left: 20px;
+          background-color: $secondary-color;
+          color: $primary-color;
+        }
+      }
+    }
+    .controls_bottom {
+      display: flex;
+      justify-content: flex-end;
+    }
+    .books {
+      .book {
+        display: flex;
+        margin-bottom: 30px;
+        .left__container {
+          margin-right: 50px;
+          .book__img {
+            width: 150px;
+            border-radius: 4%;
+          }
+        }
+        .right__container {
+          .title {
+            color: $primary-color;
+            margin: 0;
+            font-size: 22px;
+            font-weight: 700;
+          }
+          .author {
+            margin: 0;
+            margin-top: 3px;
+            font-size: 18px;
+            opacity: 0.7;
+          }
+          .price {
+            margin: 0;
+            margin-top: 10px;
+            font-size: 16px;
+            span {
+              font-weight: 800;
+              font-size: 18px;
+            }
+            .stars {
+              margin-top: 10px;
+              margin-bottom: 10px;
+            }
+          }
+          .format {
+            font-size: 17px;
+          }
+          .addtocart {
+            border: 0;
+            padding: 5px 20px;
+            border-radius: 4px;
+            background-color: $primary-color;
+            color: $secondary-color;
+            margin-right: 10px;
+          }
+          .view {
+            border: 0;
+            padding: 5px 20px;
+            border-radius: 4px;
+            background-color: white;
+            border: 1px solid $primary-color;
+            color: $primary-color;
+          }
+        }
       }
     }
   }

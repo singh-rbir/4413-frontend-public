@@ -1,12 +1,11 @@
 .search__bar {
-  width: auto;
-  padding: 0px 260px;
-  margin-top: 40px;
-  position: relative;
+  min-width: auto;
+
   .search__bar__input {
+    position: relative;
     input {
       display: block;
-      width: 100% !important;
+      min-width: auto !important;
       padding: 4px 32.5px;
       height: 50px;
       line-height: 20px;
@@ -20,13 +19,14 @@
     input:focus {
       outline-offset: 0px !important;
       outline: none !important;
+      border: 1px solid $primary-color;
       padding: 4px 32.5px;
     }
     .search_logo {
       overflow: hidden;
       position: absolute;
       top: 17px;
-      left: 270px;
+      left: 10px;
       display: block;
       text-align: center;
       pointer-events: none;

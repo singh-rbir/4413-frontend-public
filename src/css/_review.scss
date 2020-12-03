@@ -1,0 +1,48 @@
+@import '_variables';
+
+.review__section {
+  margin-top: 30px;
+  p {
+    font-size: 30px;
+    text-align: center;
+  }
+  .add__review {
+    display: flex;
+    flex-direction: column;
+    input {
+      font-size: 25px;
+      height: 50px;
+    }
+    .star__component {
+      display: flex !important;
+      flex-direction: row-reverse;
+      justify-content: flex-end;
+      font-size: 50px;
+    }
+    button {
+      border: 0;
+      padding: 5px 20px;
+      border-radius: 4px;
+      width: fit-content;
+      background-color: $success;
+      color: white;
+      margin-right: 10px;
+    }
+  }
+  .all__review {
+    .review__list {
+      .reviews {
+        p {
+          display: flex;
+          font-size: 18px;
+          span {
+            margin-left: 10px;
+          }
+        }
+      }
+    }
+  }
+  .notification {
+    margin-top: 50px;
+  }
+}
