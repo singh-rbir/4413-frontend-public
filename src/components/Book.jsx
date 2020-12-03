@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import StarRatings from 'react-star-ratings';
+import Review from './Review';
 class Book extends Component {
   state = {
     count: 1,
@@ -80,6 +81,7 @@ class Book extends Component {
               </button>
             </div>
             {/*Add Review  */}
+            <Review bid={book.bid} />
           </div>
         </div>
       </>

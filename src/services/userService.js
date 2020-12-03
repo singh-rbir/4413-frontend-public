@@ -8,7 +8,6 @@ export async function login(email, password) {
     email,
     password,
   });
-  console.log('login:', data);
   localStorage.setItem('user', JSON.stringify(data));
 }
 
@@ -17,12 +16,10 @@ export function logout() {
 }
 
 export async function register(user) {
-  console.log(user);
   return http.post(`${apiEndpoint}/signup`, user);
 }
 
 export function getCurrentUser() {
   const user = localStorage.getItem('user');
-  console.log(user);
   return user;
 }
