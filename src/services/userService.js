@@ -8,7 +8,7 @@ export async function login(email, password) {
     email,
     password,
   });
-  localStorage.setItem('user', JSON.stringify(data));
+  return data;
 }
 
 export function logout() {

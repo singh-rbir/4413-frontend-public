@@ -1,9 +1,8 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
 import Joi from 'joi';
 import Form from './common/form';
 import * as userService from '../services/userService';
-
+import { ToastContainer, toast } from 'react-toastify';
 class SignIn extends Form {
   state = {
     data: { email: '', password: '' },
@@ -11,15 +10,28 @@ class SignIn extends Form {
   };
 
   schema = {
-    email: Joi.string().required().label('Email'),
+    email: Joi.string().required().email().label('Email'),
     password: Joi.string().required().label('Password'),
   };
 
   doSubmit = async () => {
     try {
       const { email, password } = this.state.data;
-      await userService.login(email, password);
-      window.location = '/';
+      const result = await userService.login(email, password);
+      if (result.status === 0) {
+        localStorage.setItem('user', JSON.stringify(result));
+        window.location = '/';
+      } else {
+        toast.error(`${result.message}`, {
+          position: 'top-center',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
         const errors = { ...this.state.errors };
@@ -45,6 +57,18 @@ class SignIn extends Form {
             {this.renderInput('email', 'Enter your Email')}
             {this.renderInput('password', 'Enter your Password', 'password')}
             {this.renderButton('SIGN IN')}
+            <ToastContainer
+              position="top-center"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              className="notification"
+            />
           </div>
         </form>
       </div>
