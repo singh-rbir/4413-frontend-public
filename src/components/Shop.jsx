@@ -119,7 +119,6 @@ class Shop extends Component {
                       </div>
                     </div>
                     <p className="format">{data.format}</p>
-                    <button className="addtocart">Add To Cart</button>
                     <Link to={{ pathname: '/book', state: { book: data } }}>
                       <button className="view">View</button>
                     </Link>

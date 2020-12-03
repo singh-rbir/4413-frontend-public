@@ -1,43 +1,55 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
+import Joi from 'joi';
+import Form from './common/form';
+import * as userService from '../services/userService';
 
+class SignIn extends Form {
+  state = {
+    data: { email: '', password: '' },
+    errors: {},
+  };
 
-const Signin = () => {
-  return (
-    <div className="text-center mh-100">
-      <form className="form-signin">
-        <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
-        <label for="inputEmail" className="sr-only">
-          Email address
-        </label>
-        <input
-          type="email"
-          id="inputEmail"
-          className="form-control"
-          placeholder="Email address"
-          required=""
-          autofocus=""
-        />
-        <label for="inputPassword" className="sr-only">
-          Password
-        </label>
-        <input
-          type="password"
-          id="inputPassword"
-          className="form-control"
-          placeholder="Password"
-          required=""
-        />
-        <div className="checkbox mb-3">
-          <label>
-            <input type="checkbox" value="remember-me" /> Remember me
-          </label>
-        </div>
-        <button className="btn btn-lg btn-primary btn-block" type="submit">
-          Sign in
-        </button>
-      </form>
-    </div>
-  );
-};
+  schema = {
+    email: Joi.string().required().label('Email'),
+    password: Joi.string().required().label('Password'),
+  };
 
-export default Signin;
+  doSubmit = async () => {
+    try {
+      const { email, password } = this.state.data;
+      await userService.login(email, password);
+      window.location = '/';
+    } catch (ex) {
+      if (ex.response && ex.response.status === 400) {
+        const errors = { ...this.state.errors };
+        errors.email = ex.response.data;
+        this.setState({ errors });
+      }
+    }
+  };
+
+  render() {
+    //  if (authService.getCurrentUser()) return <Redirect to="/" />;
+
+    return (
+      <div className="signup__form">
+        {/* <div className='form__header'>
+            <p>Sign up for free to start catching bugs.</p>
+            <button className='google_btn'>SIGN UP WITH GOOGLE</button>
+          </div>
+          <hr /> */}
+        <form onSubmit={this.handleSubmit}>
+          <div className="form__body">
+            <p>Sign in with your email address</p>
+            {this.renderInput('email', 'Enter your Email')}
+            {this.renderInput('password', 'Enter your Password', 'password')}
+            {this.renderButton('SIGN IN')}
+          </div>
+        </form>
+      </div>
+    );
+  }
+}
+
+export default SignIn;
