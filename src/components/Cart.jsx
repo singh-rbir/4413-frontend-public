@@ -22,6 +22,10 @@ function Cart() {
         });
         if (result.data.cartItems) {
           localCart = [...localCart, ...result.data.cartItems];
+        } else {
+          if (JSON.parse(localStorage.getItem('cart'))) {
+            localCart = JSON.parse(localStorage.getItem('cart'));
+          }
         }
 
         console.log(localCart);
@@ -78,64 +82,60 @@ function Cart() {
 
   return (
     <div className="cart__container">
-      {cartItems === [] ? (
-        <>
-          {' '}
-          {cartItems !== null ? (
-            <>
-              <h1>Cart</h1>
-              <table>
-                <tr>
-                  <th>Title</th>
-                  <th>Quantity</th>
-                  <th>Price</th>
-                  <th>Total Price</th>
-                  <th></th>
-                </tr>
+      <>
+        {' '}
+        {cartItems !== null ? (
+          <>
+            <h1>Cart</h1>
+            <table>
+              <tr>
+                <th>Title</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total Price</th>
+                <th></th>
+              </tr>
 
-                {cartItems.map((data) => {
-                  return (
-                    <>
-                      <tr>
-                        <td>{data.title}</td>
-                        <td>{data.quantity}</td>
-                        <td>{data.price}</td>
-                        <td>{data.price * data.quantity}</td>
-                        <td>
-                          <button
-                            className="remove"
-                            onClick={() => removeBook(data.bid)}
-                          >
-                            Remove
-                          </button>
-                        </td>
-                      </tr>
-                    </>
-                  );
-                })}
-              </table>
-              <div className="total">
-                <p>
-                  Your Cart Total is: <span>${total}</span>
-                </p>
+              {cartItems.map((data) => {
+                return (
+                  <>
+                    <tr>
+                      <td>{data.title}</td>
+                      <td>{data.quantity}</td>
+                      <td>{data.price}</td>
+                      <td>{data.price * data.quantity}</td>
+                      <td>
+                        <button
+                          className="remove"
+                          onClick={() => removeBook(data.bid)}
+                        >
+                          Remove
+                        </button>
+                      </td>
+                    </tr>
+                  </>
+                );
+              })}
+            </table>
+            <div className="total">
+              <p>
+                Your Cart Total is: <span>${total}</span>
+              </p>
+            </div>
+            {currentuser ? (
+              <div className="goto__checkout">
+                <button onClick={goToCheckout}>Go to Checkout Page</button>
               </div>
-              {currentuser ? (
-                <div className="goto__checkout">
-                  <button onClick={goToCheckout}>Go to Checkout Page</button>
-                </div>
-              ) : (
-                <Link to={{ pathname: '/signin', state: { backto: 'cart' } }}>
-                  SignIn to Checkout
-                </Link>
-              )}
-            </>
-          ) : (
-            <h1>Nothing In Cart</h1>
-          )}{' '}
-        </>
-      ) : (
-        <h1>Nothing In Cart</h1>
-      )}
+            ) : (
+              <Link to={{ pathname: '/signin', state: { backto: 'cart' } }}>
+                SignIn to Checkout
+              </Link>
+            )}
+          </>
+        ) : (
+          <h1>Nothing In Cart</h1>
+        )}{' '}
+      </>
     </div>
   );
 }
