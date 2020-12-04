@@ -3,11 +3,11 @@ import http from './httpService';
 const apiEndpoint = `/user`;
 
 export async function login(email, password) {
-  console.log(email, login);
   const { data } = await http.post(`${apiEndpoint}/login`, {
     email,
     password,
   });
+  console.log(data);
   return data;
 }
 

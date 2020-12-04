@@ -18,8 +18,9 @@ class SignIn extends Form {
     try {
       const { email, password } = this.state.data;
       const result = await userService.login(email, password);
-
       if (result.status === 0) {
+        console.log('Inside status');
+
         localStorage.setItem('user', JSON.stringify(result));
         toast.success(`Logged In`, {
           position: 'top-center',
@@ -30,13 +31,12 @@ class SignIn extends Form {
           draggable: true,
           progress: undefined,
         });
-        if (
-          this.props.location !== null &&
-          this.props.location.state.backto === 'cart'
-        ) {
+
+        if (this.props.location.state !== null) {
           setTimeout(() => (window.location = '/cart'), 1000);
+        } else {
+          setTimeout(() => (window.location = '/'), 1000);
         }
-        setTimeout(() => (window.location = '/'), 1000);
       } else {
         toast.error(`${result.message}`, {
           position: 'top-center',
