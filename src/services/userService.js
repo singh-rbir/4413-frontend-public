@@ -23,3 +23,7 @@ export function getCurrentUser() {
   const user = localStorage.getItem('user');
   return user;
 }
+
+export function addAddress(address) {
+  return http.post(`${apiEndpoint}/addAddress`, address);
+}

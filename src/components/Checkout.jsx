@@ -5,6 +5,7 @@ import Joi from 'joi';
 import Form from './common/form';
 import { ToastContainer, toast } from 'react-toastify';
 import Payment from './Payment';
+import AddAddress from './AddAddress';
 
 class Checkout extends Component {
   state = {
@@ -27,7 +28,8 @@ class Checkout extends Component {
             Your Total is : {this.state.checkoutItems.cartTotal}
           </p>
         </div>
-        <div className="payment__container">
+        <div className="form__container">
+          <AddAddress currentUser={this.state.currentUser} />
           <Payment currentUser={this.state.currentUser} />
         </div>
       </div>
