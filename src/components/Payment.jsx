@@ -1,27 +1,35 @@
 import React from 'react';
 import Joi from 'joi';
 import Form from './common/form';
-import * as userService from '../services/userService';
+import * as orderService from '../services/orderService';
 import { ToastContainer, toast } from 'react-toastify';
-class SignIn extends Form {
+class Payment extends Form {
   state = {
-    data: { email: '', password: '' },
+    data: { name: '', number: '', expiry: '', cvv: '' },
     errors: {},
   };
 
   schema = {
-    email: Joi.string().required().email().label('Email'),
-    password: Joi.string().required().label('Password'),
+    name: Joi.string(),
+    number: Joi.number(),
+    expiry: Joi.string(),
+    cvv: Joi.number(),
   };
 
   doSubmit = async () => {
     try {
-      const { email, password } = this.state.data;
-      const result = await userService.login(email, password);
-
-      if (result.status === 0) {
-        localStorage.setItem('user', JSON.stringify(result));
-        toast.success(`Logged In`, {
+      const { name, number, expiry, cvv } = this.state.data;
+      let order = {
+        userId: this.props.currentUser.userId,
+        name: name,
+        number: number,
+        expiry: expiry,
+        cvv: cvv,
+      };
+      const result = await orderService.confirmOrder(order);
+      console.log(result);
+      if (result.data.status === 0) {
+        toast.success(`Order Successful`, {
           position: 'top-center',
           autoClose: 5000,
           hideProgressBar: false,
@@ -30,16 +38,10 @@ class SignIn extends Form {
           draggable: true,
           progress: undefined,
         });
-        if (
-          this.props.location !== null &&
-          this.props.location.state.backto === 'cart'
-        ) {
-          setTimeout(() => (window.location = '/cart'), 1000);
-        } else {
-          setTimeout(() => (window.location = '/'), 1000);
-        }
+        localStorage.removeItem('cart');
+        setTimeout(() => (window.location = '/'), 1000);
       } else {
-        toast.error(`${result.message}`, {
+        toast.error(`${result.data.message}`, {
           position: 'top-center',
           autoClose: 5000,
           hideProgressBar: false,
@@ -59,21 +61,16 @@ class SignIn extends Form {
   };
 
   render() {
-    //  if (authService.getCurrentUser()) return <Redirect to="/" />;
-
     return (
       <div className="signup__form">
-        {/* <div className='form__header'>
-            <p>Sign up for free to start catching bugs.</p>
-            <button className='google_btn'>SIGN UP WITH GOOGLE</button>
-          </div>
-          <hr /> */}
         <form onSubmit={this.handleSubmit}>
           <div className="form__body">
-            <p>Sign in with your email address</p>
-            {this.renderInput('email', 'Enter your Email')}
-            {this.renderInput('password', 'Enter your Password', 'password')}
-            {this.renderButton('SIGN IN')}
+            <p>Enter you Payment Details</p>
+            {this.renderInput('name', 'Enter your Name')}
+            {this.renderInput('number', 'Enter your Card Number')}
+            {this.renderInput('expiry', 'Enter your expiry')}
+            {this.renderInput('cvv', 'Enter your cvv')}
+            {this.renderButton('Confirm Payment')}
             <ToastContainer
               position="top-center"
               autoClose={5000}
@@ -93,4 +90,4 @@ class SignIn extends Form {
   }
 }
 
-export default SignIn;
+export default Payment;

@@ -14,6 +14,9 @@ export async function getBookBySearchTitle(title) {
   return http.get(`${apiEndpoint}/searchByTitle?title=${title}`);
 }
 
+export async function getBookByBid(bid) {
+  return http.get(`${apiEndpoint}//getProductInfo?bid=${bid}`);
+}
 export async function getByCategory(category, pageno) {
   return http.get(
     `${apiEndpoint}/findByCategory?category=${category}&pageno=${pageno}`

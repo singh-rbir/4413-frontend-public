@@ -2,18 +2,38 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import StarRatings from 'react-star-ratings';
 import Review from './Review';
+import * as userService from '../services/userService';
+import { ToastContainer, toast } from 'react-toastify';
+
 class Book extends Component {
   state = {
     count: 1,
   };
-  addToCart = () => {
-    console.log('Inside Add to Cart');
+  addToCart = (book, quantity) => {
+    let localCart = localStorage.getItem('cart');
+    let cartArray;
+    let bookObj = { ...book, quantity: quantity };
+    if (localCart !== null) {
+      cartArray = [...JSON.parse(localCart), bookObj];
+    } else {
+      cartArray = [bookObj];
+    }
+
+    localStorage.setItem('cart', JSON.stringify(cartArray));
+    toast.success(`Book Added To Cart`, {
+      position: 'top-center',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+    console.log(cartArray);
   };
 
   handleChange = (event) => {
     this.setState({ count: event.target.value < 1 ? 1 : event.target.value });
-    if (event.target.value >= 1) {
-    }
   };
   render() {
     const { book } = this.props.location.state;
@@ -43,7 +63,7 @@ class Book extends Component {
             </div>
             <div className="book__price">
               Price: {'  '}
-              <span>{book.price}</span>
+              <span>${book.price}</span>
             </div>
             <p className="descrption__title">Description</p>
             <div className="book__description">
@@ -76,10 +96,25 @@ class Book extends Component {
               </div>
             </div>
             <div className="book__confirm__btn">
-              <button className="add__to__cart__btn" onClick={this.addToCart}>
+              <button
+                className="add__to__cart__btn"
+                onClick={() => this.addToCart(book, count)}
+              >
                 Add to Cart{' '}
               </button>
             </div>
+            <ToastContainer
+              position="top-center"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              className="notification"
+            />
             {/*Add Review  */}
             <Review bid={book.bid} />
           </div>
