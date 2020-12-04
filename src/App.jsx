@@ -8,7 +8,7 @@ import Home from './components/Home';
 import Shop from './components/Shop';
 import Profile from './components/Profile';
 import Book from './components/Book';
-
+import Checkout from './components/Checkout';
 import Cart from './components/Cart';
 
 function App() {
@@ -17,6 +17,7 @@ function App() {
       <Header />
       <div className="app__container">
         <Switch>
+          <Route path="/checkout" component={Checkout} />
           <Route path="/shop" component={Shop} />
           <Route path="/profile" component={Profile} />
           <Route path="/signin" component={Signin} />

@@ -58,28 +58,34 @@ const Review = (props) => {
   return (
     <div className="review__section">
       <hr />
-      <p>Add Review</p>
-      <div className="add__review">
-        <label>Enter your Review</label>
-        <input
-          type="text"
-          value={message}
-          placeholder="Enter your Review"
-          onChange={onChangeReview}
-        />
+      {currentUser !== null ? (
+        <>
+          <p>Add Review</p>
+          <div className="add__review">
+            <label>Enter your Review</label>
+            <input
+              type="text"
+              value={message}
+              placeholder="Enter your Review"
+              onChange={onChangeReview}
+            />
 
-        <StarRatingComponent
-          name="rating"
-          starCount={5}
-          starColor="blue"
-          value={rating}
-          onStarClick={onChangeRating}
-          className="star__component"
-        />
-        <button onClick={addReview}>Add Review</button>
-      </div>
+            <StarRatingComponent
+              name="rating"
+              starCount={5}
+              starColor="blue"
+              value={rating}
+              onStarClick={onChangeRating}
+              className="star__component"
+            />
+            <button onClick={addReview}>Add Review</button>
+            <hr />
+          </div>
+        </>
+      ) : (
+        <> </>
+      )}
 
-      <hr />
       <div className="all__review">
         <p>All Reviews</p>
         <div className="review__list">

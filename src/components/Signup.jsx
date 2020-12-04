@@ -39,8 +39,20 @@ class SignUp extends Form {
           progress: undefined,
         });
       } else {
-        await userService.login(email, password);
-        window.location = '/';
+        const result = await userService.login(email, password);
+        if (result.status === 0) {
+          localStorage.setItem('user', JSON.stringify(result));
+          toast.success(`Registered Successfully`, {
+            position: 'top-center',
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+          setTimeout(() => (window.location = '/'), 1000);
+        }
       }
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {

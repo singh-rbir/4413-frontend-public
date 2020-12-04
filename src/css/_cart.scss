@@ -1,0 +1,32 @@
+@import '_variables';
+.cart__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 60%;
+  }
+
+  td,
+  th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+  .remove {
+    background-color: $danger;
+    color: white;
+    border: 0;
+    border-radius: 2px;
+  }
+  .total {
+    margin-top: 30px;
+    font-size: 26px;
+    span {
+      font-weight: 700;
+    }
+  }
+}
