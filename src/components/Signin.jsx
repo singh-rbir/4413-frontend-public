@@ -35,9 +35,8 @@ class SignIn extends Form {
           this.props.location.state.backto === 'cart'
         ) {
           setTimeout(() => (window.location = '/cart'), 1000);
-        } else {
-          setTimeout(() => (window.location = '/'), 1000);
         }
+        setTimeout(() => (window.location = '/'), 1000);
       } else {
         toast.error(`${result.message}`, {
           position: 'top-center',
