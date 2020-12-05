@@ -9,27 +9,23 @@ import AddAddress from './AddAddress';
 
 class Checkout extends Component {
   state = {
-    checkoutItems: {},
     currentUser: {},
   };
 
   async componentDidMount() {
     const currentuser = JSON.parse(userService.getCurrentUser());
     this.setState({ currentUser: currentuser });
-    const result = await orderService.getCart({ userId: currentuser.userId });
-    this.setState({ checkoutItems: result.data });
   }
 
   render() {
     return (
       <div className="checkout__container">
-        <div className="checkout__total">
-          <p style={{ fontSize: '25px', textAlign: 'center' }}>
-            Your Total is : {this.state.checkoutItems.cartTotal}
-          </p>
-        </div>
+        <h1>Checkout</h1>
         <div className="form__container">
-          <AddAddress currentUser={this.state.currentUser} />
+          <AddAddress
+            currentUser={this.state.currentUser}
+            address={this.props.address}
+          />
           <Payment currentUser={this.state.currentUser} />
         </div>
       </div>

@@ -27,3 +27,7 @@ export function getCurrentUser() {
 export function addAddress(address) {
   return http.post(`${apiEndpoint}/addAddress`, address);
 }
+
+export function getAddress(user) {
+  return http.get(`${apiEndpoint}/getAddress`, user);
+}

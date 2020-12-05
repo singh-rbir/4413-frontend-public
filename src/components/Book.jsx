@@ -3,13 +3,15 @@ import { Link } from 'react-router-dom';
 import StarRatings from 'react-star-ratings';
 import Review from './Review';
 import * as userService from '../services/userService';
+import * as orderService from '../services/orderService';
 import { ToastContainer, toast } from 'react-toastify';
 
 class Book extends Component {
   state = {
     count: 1,
+    currentUser: null,
   };
-  addToCart = (book, quantity) => {
+  addToCart = async (book, quantity) => {
     let localCart = localStorage.getItem('cart');
     let cartArray;
     let bookObj = { ...book, quantity: quantity };
@@ -18,19 +20,53 @@ class Book extends Component {
     } else {
       cartArray = [bookObj];
     }
-
-    localStorage.setItem('cart', JSON.stringify(cartArray));
-    toast.success(`Book Added To Cart`, {
-      position: 'top-center',
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
-    console.log(cartArray);
+    if (this.state.currentUser !== null) {
+      const result = await orderService.addSingleItemToCart({
+        userId: this.state.currentUser.userId,
+        bid: book.bid,
+        quantity: quantity,
+        price: book.price,
+      });
+      if (result.data.status === 0) {
+        localStorage.setItem('cart', JSON.stringify(cartArray));
+        toast.success(`${result.data.message}`, {
+          position: 'top-center',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      } else {
+        toast.error(`${result.data.message}`, {
+          position: 'top-center',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+    } else {
+      localStorage.setItem('cart', JSON.stringify(cartArray));
+      toast.success(`Book Added To Cart`, {
+        position: 'top-center',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
   };
+
+  async componentDidMount() {
+    const user = JSON.parse(await userService.getCurrentUser());
+    this.setState({ currentUser: user });
+  }
 
   handleChange = (event) => {
     this.setState({ count: event.target.value < 1 ? 1 : event.target.value });

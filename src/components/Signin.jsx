@@ -70,8 +70,13 @@ class SignIn extends Form {
         <form onSubmit={this.handleSubmit}>
           <div className="form__body">
             <p>Sign in with your email address</p>
-            {this.renderInput('email', 'Enter your Email')}
-            {this.renderInput('password', 'Enter your Password', 'password')}
+            {this.renderInput('email', 'Enter your Email', 'Your Email')}
+            {this.renderInput(
+              'password',
+              'Enter your Password',
+              'Your Password',
+              'password'
+            )}
             {this.renderButton('SIGN IN')}
             <ToastContainer
               position="top-center"

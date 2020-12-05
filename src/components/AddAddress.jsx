@@ -27,6 +27,8 @@ class AddAdress extends Form {
     phone: Joi.number(),
   };
 
+
+
   doSubmit = async () => {
     try {
       const {
@@ -87,13 +89,13 @@ class AddAdress extends Form {
         <form onSubmit={this.handleSubmit}>
           <div className="form__body">
             <p>Enter your delivery address</p>
-            {this.renderInput('streetno', 'Enter your Street No')}
-            {this.renderInput('streetName', 'Enter your Street Name')}
-            {this.renderInput('city', 'Enter your City')}
-            {this.renderInput('province', 'Enter your Province')}
-            {this.renderInput('country', 'Enter your Country')}
-            {this.renderInput('zip', 'Enter your zip code')}
-            {this.renderInput('phone', 'Enter your phone number')}
+            {this.renderInput('streetno', 'Enter your Street No',"StreetNo")}
+            {this.renderInput('streetName', 'Enter your Street Name',"StreetName")}
+            {this.renderInput('city', 'Enter your City',"City")}
+            {this.renderInput('province', 'Enter your Province',"Province")}
+            {this.renderInput('country', 'Enter your Country',"Country")}
+            {this.renderInput('zip', 'Enter your zip code','Zip Code (eg: L1R342)')}
+            {this.renderInput('phone', 'Enter your phone number',"Your Phone Number (10 digits)")}
             {this.renderButton('Confirm Address')}
             <ToastContainer
               position="top-center"

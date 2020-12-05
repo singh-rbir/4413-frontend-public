@@ -75,10 +75,23 @@ class SignUp extends Form {
           <form onSubmit={this.handleSubmit}>
             <div className="form__body">
               <p>Sign up with your email address</p>
-              {this.renderInput('email', "What's your email?")}
-              {this.renderInput('firstname', "What's your firstname?")}
-              {this.renderInput('lastname', "What's your lastname?")}
-              {this.renderInput('password', 'Create a Password', 'password')}
+              {this.renderInput('email', "What's your email?", 'Your Email')}
+              {this.renderInput(
+                'firstname',
+                "What's your firstname?",
+                'Your First Name'
+              )}
+              {this.renderInput(
+                'lastname',
+                "What's your lastname?",
+                'Your Last Name'
+              )}
+              {this.renderInput(
+                'password',
+                'Create a Password',
+                'Your Password (Choose a Strong one)',
+                'password'
+              )}
               {this.renderButton('SIGN UP')}
             </div>
           </form>

@@ -29,4 +29,14 @@
       font-weight: 700;
     }
   }
+  .checkout__container {
+    width: 100%;
+    h1 {
+      text-align: center;
+    }
+    .form__container {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
 }

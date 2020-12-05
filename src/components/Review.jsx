@@ -90,8 +90,8 @@ const Review = (props) => {
         <p>All Reviews</p>
         <div className="review__list">
           {reviewList.map((data) => (
-            <>
-              <div className="reviews" key={data.reviewId}>
+            <div key={data.reviewId}>
+              <div className="reviews">
                 <p>
                   {data.message}{' '}
                   <span>
@@ -105,7 +105,7 @@ const Review = (props) => {
                 </p>
               </div>
               <hr />
-            </>
+            </div>
           ))}
         </div>
       </div>

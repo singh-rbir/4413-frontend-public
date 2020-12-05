@@ -39,7 +39,7 @@ class Payment extends Form {
           progress: undefined,
         });
         localStorage.removeItem('cart');
-        setTimeout(() => (window.location = '/'), 1000);
+        setTimeout(() => (window.location = '/shop'), 1000);
       } else {
         toast.error(`${result.data.message}`, {
           position: 'top-center',
@@ -66,23 +66,19 @@ class Payment extends Form {
         <form onSubmit={this.handleSubmit}>
           <div className="form__body">
             <p>Enter you Payment Details</p>
-            {this.renderInput('name', 'Enter your Name')}
-            {this.renderInput('number', 'Enter your Card Number')}
-            {this.renderInput('expiry', 'Enter your expiry')}
-            {this.renderInput('cvv', 'Enter your cvv')}
+            {this.renderInput('name', 'Enter your Name', 'Your Full Name')}
+            {this.renderInput(
+              'number',
+              'Enter your Card Number',
+              'Your credit card number'
+            )}
+            {this.renderInput('expiry', 'Enter your expiry', 'MM/YY')}
+            {this.renderInput(
+              'cvv',
+              'Enter your cvv',
+              'Enter your CVV (3 digits)'
+            )}
             {this.renderButton('Confirm Payment')}
-            <ToastContainer
-              position="top-center"
-              autoClose={5000}
-              hideProgressBar={false}
-              newestOnTop={false}
-              closeOnClick
-              rtl={false}
-              pauseOnFocusLoss
-              draggable
-              pauseOnHover
-              className="notification"
-            />
           </div>
         </form>
       </div>
