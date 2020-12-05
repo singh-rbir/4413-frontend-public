@@ -1,3 +1,4 @@
+import { func } from 'joi';
 import http from './httpService';
 
 const apiEndpoint = `/user`;
