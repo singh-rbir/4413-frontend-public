@@ -148,7 +148,8 @@ class Cart extends Component {
               ) : (
                 <>
                   <Link to={{ pathname: '/signin', state: { backto: 'cart' } }}>
-                    SignIn to Checkout
+                    <br/>
+                      <u>SignIn to Checkout</u>
                   </Link>
                 </>
               )}
