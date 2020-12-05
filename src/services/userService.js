@@ -29,6 +29,6 @@ export function addAddress(address) {
   return http.post(`${apiEndpoint}/addAddress`, address);
 }
 
-export function getAddress(user) {
-  return http.get(`${apiEndpoint}/getAddress`, user);
+export function getAddress(userId) {
+  return http.get(`${apiEndpoint}/getAddress?userId=${userId}`);
 }

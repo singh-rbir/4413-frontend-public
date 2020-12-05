@@ -13,6 +13,15 @@ class AddAdress extends Form {
       country: '',
       zip: '',
       phone: '',
+      address: {
+        streetno: '',
+        streetName: '',
+        city: '',
+        province: '',
+        country: '',
+        zip: '',
+        phone: '',
+      },
     },
     errors: {},
   };
@@ -26,8 +35,6 @@ class AddAdress extends Form {
     zip: Joi.string(),
     phone: Joi.number(),
   };
-
-
 
   doSubmit = async () => {
     try {
@@ -82,20 +89,78 @@ class AddAdress extends Form {
       }
     }
   };
-
+  async componentDidMount() {
+    const address = await userService.getAddress(
+      JSON.parse(userService.getCurrentUser()).userId
+    );
+    this.setState({ address: address.data });
+    this.setState({ streetno: this.state.address.streetNo });
+    this.setState({ streetName: this.state.address.streetName });
+    this.setState({ city: this.state.address.city });
+    this.setState({ province: this.state.address.province });
+    this.setState({ country: this.state.address.country });
+    this.setState({ zip: this.state.address.zip });
+    this.setState({ phone: this.state.address.phone });
+  }
   render() {
+    const {
+      streetno,
+      streetName,
+      city,
+      province,
+      country,
+      zip,
+      phone,
+    } = this.state;
+
     return (
       <div className="signup__form">
         <form onSubmit={this.handleSubmit}>
           <div className="form__body">
             <p>Enter your delivery address</p>
-            {this.renderInput('streetno', 'Enter your Street No',"StreetNo")}
-            {this.renderInput('streetName', 'Enter your Street Name',"StreetName")}
-            {this.renderInput('city', 'Enter your City',"City")}
-            {this.renderInput('province', 'Enter your Province',"Province")}
-            {this.renderInput('country', 'Enter your Country',"Country")}
-            {this.renderInput('zip', 'Enter your zip code','Zip Code (eg: L1R342)')}
-            {this.renderInput('phone', 'Enter your phone number',"Your Phone Number (10 digits)")}
+            {this.renderInput(
+              'streetno',
+              'Enter your Street No',
+              'StreetNo',
+              'number',
+              streetno
+            )}
+            {this.renderInput(
+              'streetName',
+              'Enter your Street Name',
+              'StreetName',
+              'text',
+              streetName
+            )}
+            {this.renderInput('city', 'Enter your City', 'City', 'text', city)}
+            {this.renderInput(
+              'province',
+              'Enter your Province',
+              'Province',
+              'text',
+              province
+            )}
+            {this.renderInput(
+              'country',
+              'Enter your Country',
+              'Country',
+              'text',
+              country
+            )}
+            {this.renderInput(
+              'zip',
+              'Enter your zip code',
+              'Zip Code (eg: L1R342)',
+              'text',
+              zip
+            )}
+            {this.renderInput(
+              'phone',
+              'Enter your phone number',
+              'Your Phone Number (10 digits)',
+              'number',
+              phone
+            )}
             {this.renderButton('Confirm Address')}
             <ToastContainer
               position="top-center"

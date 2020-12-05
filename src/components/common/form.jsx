@@ -47,20 +47,24 @@ class Form extends Component {
 
   renderButton(label) {
     return (
-      <button disabled={this.validate()} className="form__btn">
+      <button
+        disabled={this.validate()}
+        className="form__btn"
+        onClick={this.handleSubmit}
+      >
         {label}
       </button>
     );
   }
 
-  renderInput(name, label, placeholder, type = 'text') {
+  renderInput(name, label, placeholder, type = 'text', value) {
     const { data, errors } = this.state;
 
     return (
       <Input
         type={type}
         name={name}
-        value={data[name]}
+        value={value}
         label={label}
         placeholder={placeholder}
         onChange={this.handleChange}

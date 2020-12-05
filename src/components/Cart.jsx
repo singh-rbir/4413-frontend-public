@@ -10,11 +10,10 @@ class Cart extends Component {
   state = {
     cartItems: JSON.parse(localStorage.getItem('cart')),
     currentuser: JSON.parse(userService.getCurrentUser()),
-    address: {},
   };
 
   async componentDidMount() {
-    const { currentuser, cartItems } = this.state;
+    const { currentuser } = this.state;
 
     if (currentuser) {
       await this.addItemsToCart();
@@ -34,14 +33,13 @@ class Cart extends Component {
         },
       ];
     }
-    console.log(tempArray);
+
     this.setState({ cartItems: tempArray });
-    console.log('Inside addCartItems Length', cartItems);
+
     const result1 = await orderService.addItemsToCart({
       userId: currentuser.userId,
       itemList: tempArray,
     });
-    console.log(result1);
   };
 
   removeBook = async (bid) => {
@@ -96,7 +94,7 @@ class Cart extends Component {
       <div className="cart__container">
         <>
           {' '}
-          {cartItems !== null ? (
+          {cartItems.length !== 0 ? (
             <>
               <h1>Cart</h1>
               <table>
