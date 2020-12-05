@@ -26,21 +26,24 @@ class Cart extends Component {
     const { currentuser, cartItems } = this.state;
     let tempArray = [];
     console.log('Inside addCartItems Length', cartItems);
-    for (let i = 0; i < cartItems.length; i++) {
-      tempArray = [
-        ...tempArray,
-        {
-          bid: cartItems[i].bid,
-          quantity: cartItems[i].quantity,
-          price: cartItems[i].price,
-        },
-      ];
-    }
+    if(cartItems){
+      for (let i = 0; i < cartItems.length; i++) {
+        tempArray = [
+          ...tempArray,
+          {
+            bid: cartItems[i].bid,
+            quantity: cartItems[i].quantity,
+            price: cartItems[i].price,
+          },
+        ];
+      }
+  
+      const result1 = await orderService.addItemsToCart({
+        userId: currentuser.userId,
+        itemList: tempArray,
+      });
 
-    const result1 = await orderService.addItemsToCart({
-      userId: currentuser.userId,
-      itemList: tempArray,
-    });
+    }
   };
 
   removeBook = async (bid) => {
@@ -98,6 +101,7 @@ class Cart extends Component {
           {cartItems !== null ? (
             <>
               <h1>Cart</h1>
+              <br/>
               <table>
                 <thead>
                   <tr>
@@ -134,7 +138,7 @@ class Cart extends Component {
 
               <div className="total">
                 <p>
-                  Your Cart Total is: <span>${this.getTotal()}</span>
+                  <span style={{ color: '#4a8cff' }}>Your Cart Total is: </span><span>${this.getTotal()}</span>
                 </p>
               </div>
               {currentuser ? (
@@ -144,13 +148,14 @@ class Cart extends Component {
               ) : (
                 <>
                   <Link to={{ pathname: '/signin', state: { backto: 'cart' } }}>
-                    SignIn to Checkout
+                    <br/>
+                      <u>SignIn to Checkout</u>
                   </Link>
                 </>
               )}
             </>
           ) : (
-            <h1>Nothing In Cart</h1>
+            <h1><br/>Nothing In Cart</h1>
           )}{' '}
         </>
       </div>
