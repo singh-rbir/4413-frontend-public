@@ -26,7 +26,7 @@ class Cart extends Component {
     const { currentuser, cartItems } = this.state;
     let tempArray = [];
     console.log('Inside addCartItems Length', cartItems);
-    if(cartItems){
+    if (cartItems) {
       for (let i = 0; i < cartItems.length; i++) {
         tempArray = [
           ...tempArray,
@@ -37,12 +37,11 @@ class Cart extends Component {
           },
         ];
       }
-  
+
       const result1 = await orderService.addItemsToCart({
         userId: currentuser.userId,
         itemList: tempArray,
       });
-
     }
   };
 
@@ -50,13 +49,36 @@ class Cart extends Component {
     const { cartItems, currentuser } = this.state;
     let newList = _.filter(cartItems, (item) => item.bid !== bid);
     localStorage.setItem('cart', JSON.stringify(newList));
-    const result = await orderService.removeCartItem({
-      userId: currentuser.userId,
-      bid: bid,
-    });
-    if (result.data.status === 0) {
-      console.log(result);
-      toast.success(`${result.data.message}`, {
+    if (currentuser) {
+      const result = await orderService.removeCartItem({
+        userId: currentuser.userId,
+        bid: bid,
+      });
+      if (result.data.status === 0) {
+        console.log(result);
+        toast.success(`${result.data.message}`, {
+          position: 'top-center',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        this.setState({ cartItems: newList });
+      } else {
+        toast.error(`${result.data.message}`, {
+          position: 'top-center',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+    } else {
+      toast.success(`Book Removed From Cart`, {
         position: 'top-center',
         autoClose: 5000,
         hideProgressBar: false,
@@ -66,16 +88,6 @@ class Cart extends Component {
         progress: undefined,
       });
       this.setState({ cartItems: newList });
-    } else {
-      toast.error(`${result.data.message}`, {
-        position: 'top-center',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
     }
   };
 
@@ -101,7 +113,7 @@ class Cart extends Component {
           {cartItems !== null ? (
             <>
               <h1>Cart</h1>
-              <br/>
+              <br />
               <table>
                 <thead>
                   <tr>
@@ -138,7 +150,8 @@ class Cart extends Component {
 
               <div className="total">
                 <p>
-                  <span style={{ color: '#4a8cff' }}>Your Cart Total is: </span><span>${this.getTotal()}</span>
+                  <span style={{ color: '#4a8cff' }}>Your Cart Total is: </span>
+                  <span>${this.getTotal()}</span>
                 </p>
               </div>
               {currentuser ? (
@@ -148,16 +161,32 @@ class Cart extends Component {
               ) : (
                 <>
                   <Link to={{ pathname: '/signin', state: { backto: 'cart' } }}>
-                    <br/>
-                      <u>SignIn to Checkout</u>
+                    <br />
+                    <u>SignIn to Checkout</u>
                   </Link>
                 </>
               )}
             </>
           ) : (
-            <h1><br/>Nothing In Cart</h1>
+            <h1>
+              <br />
+              Nothing In Cart
+            </h1>
           )}{' '}
         </>
+        <ToastContainer
+          position="top-center"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          className="notification"
+          style={{ marginTop: '100px' }}
+        />
       </div>
     );
   }

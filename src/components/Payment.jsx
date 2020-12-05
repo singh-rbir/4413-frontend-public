@@ -73,13 +73,21 @@ class Payment extends Form {
               'Your credit card number'
             )}
             {this.renderInput('expiry', 'Expiry', 'MM/YY')}
-            {this.renderInput(
-              'cvv',
-              'CVV',
-              'Enter your CVV (3 digits)'
-            )}
+            {this.renderInput('cvv', 'CVV', 'Enter your CVV (3 digits)')}
             {this.renderButton('Confirm Payment')}
           </div>
+          <ToastContainer
+            position="top-center"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            className="notification"
+          />
         </form>
       </div>
     );
