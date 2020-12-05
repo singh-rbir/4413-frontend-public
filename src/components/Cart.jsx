@@ -98,6 +98,7 @@ class Cart extends Component {
           {cartItems !== null ? (
             <>
               <h1>Cart</h1>
+              <br/>
               <table>
                 <thead>
                   <tr>
@@ -134,7 +135,7 @@ class Cart extends Component {
 
               <div className="total">
                 <p>
-                  Your Cart Total is: <span>${this.getTotal()}</span>
+                  <span style={{ color: '#4a8cff' }}>Your Cart Total is: </span><span>${this.getTotal()}</span>
                 </p>
               </div>
               {currentuser ? (

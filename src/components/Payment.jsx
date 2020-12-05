@@ -29,7 +29,7 @@ class Payment extends Form {
       const result = await orderService.confirmOrder(order);
       console.log(result);
       if (result.data.status === 0) {
-        toast.success(`Order Successful`, {
+        toast.success(`Order successfully completed!`, {
           position: 'top-center',
           autoClose: 5000,
           hideProgressBar: false,
@@ -66,16 +66,16 @@ class Payment extends Form {
         <form onSubmit={this.handleSubmit}>
           <div className="form__body">
             <p>Enter you Payment Details</p>
-            {this.renderInput('name', 'Enter your Name', 'Your Full Name')}
+            {this.renderInput('name', 'Name', 'Your Full Name')}
             {this.renderInput(
               'number',
-              'Enter your Card Number',
+              'Card Number',
               'Your credit card number'
             )}
-            {this.renderInput('expiry', 'Enter your expiry', 'MM/YY')}
+            {this.renderInput('expiry', 'Expiry', 'MM/YY')}
             {this.renderInput(
               'cvv',
-              'Enter your cvv',
+              'CVV',
               'Enter your CVV (3 digits)'
             )}
             {this.renderButton('Confirm Payment')}
