@@ -26,21 +26,24 @@ class Cart extends Component {
     const { currentuser, cartItems } = this.state;
     let tempArray = [];
     console.log('Inside addCartItems Length', cartItems);
-    for (let i = 0; i < cartItems.length; i++) {
-      tempArray = [
-        ...tempArray,
-        {
-          bid: cartItems[i].bid,
-          quantity: cartItems[i].quantity,
-          price: cartItems[i].price,
-        },
-      ];
-    }
+    if(cartItems){
+      for (let i = 0; i < cartItems.length; i++) {
+        tempArray = [
+          ...tempArray,
+          {
+            bid: cartItems[i].bid,
+            quantity: cartItems[i].quantity,
+            price: cartItems[i].price,
+          },
+        ];
+      }
+  
+      const result1 = await orderService.addItemsToCart({
+        userId: currentuser.userId,
+        itemList: tempArray,
+      });
 
-    const result1 = await orderService.addItemsToCart({
-      userId: currentuser.userId,
-      itemList: tempArray,
-    });
+    }
   };
 
   removeBook = async (bid) => {
@@ -151,7 +154,7 @@ class Cart extends Component {
               )}
             </>
           ) : (
-            <h1>Nothing In Cart</h1>
+            <h1><br/>Nothing In Cart</h1>
           )}{' '}
         </>
       </div>
