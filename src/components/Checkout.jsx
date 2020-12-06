@@ -2,13 +2,9 @@ import React, { Component } from 'react';
 import * as orderService from '../services/orderService';
 import * as userService from '../services/userService';
 import Joi from 'joi';
-<<<<<<< HEAD
 import Form from './common/form';
 import { Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
-=======
-import {Link} from 'react-router-dom';
->>>>>>> 4aea83ab5d22daff78cae3c4168c63443e6e0c03
 import Payment from './Payment';
 import AddAddress from './AddAddress';
 import { AiTwotonePhone } from 'react-icons/ai';
