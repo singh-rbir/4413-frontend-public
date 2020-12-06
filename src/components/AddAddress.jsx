@@ -61,6 +61,8 @@ class AddAdress extends Form {
           draggable: true,
           progress: undefined,
         });
+        setTimeout(() => (window.location = "/cart"), 2000);
+        
       } else {
         toast.error(`${result.data.message}`, {
           position: 'top-center',
@@ -107,7 +109,7 @@ class AddAdress extends Form {
               'Your Phone Number (10 digits)'
             )}
             {this.renderButton('Confirm Address')}
-            <ToastContainer
+            {/* <ToastContainer
               position="top-center"
               autoClose={5000}
               hideProgressBar={false}
@@ -118,7 +120,7 @@ class AddAdress extends Form {
               draggable
               pauseOnHover
               className="notification"
-            />
+            /> */}
           </div>
         </form>
       </div>
