@@ -62,6 +62,8 @@ class AddAdress extends Form {
           draggable: true,
           progress: undefined,
         });
+        setTimeout(() => (window.location = "/cart"), 2000);
+        
       } else {
         toast.error(`${result.data.message}`, {
           position: 'top-center',

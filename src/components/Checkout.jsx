@@ -2,9 +2,13 @@ import React, { Component } from 'react';
 import * as orderService from '../services/orderService';
 import * as userService from '../services/userService';
 import Joi from 'joi';
+<<<<<<< HEAD
 import Form from './common/form';
 import { Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
+=======
+import {Link} from 'react-router-dom';
+>>>>>>> 4aea83ab5d22daff78cae3c4168c63443e6e0c03
 import Payment from './Payment';
 import AddAddress from './AddAddress';
 import { AiTwotonePhone } from 'react-icons/ai';
@@ -13,7 +17,7 @@ class Checkout extends Component {
     currentUser: {},
     showAddressForm: false,
   };
-
+  
   async componentDidMount() {
     const currentuser = JSON.parse(userService.getCurrentUser());
     this.setState({ currentUser: currentuser });
@@ -25,6 +29,10 @@ class Checkout extends Component {
     });
   }
 
+  showAddressForm = () => {
+    console.log("show address clicked");
+  }
+
   render() {
     const {
       zip,
@@ -33,7 +41,7 @@ class Checkout extends Component {
       streetNo,
       streetName,
       phone,
-      country,
+      country
     } = this.props.address;
     return (
       <div className="checkout__container">
