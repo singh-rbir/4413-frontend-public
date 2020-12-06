@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import * as orderService from '../services/orderService';
 import * as userService from '../services/userService';
 import Joi from 'joi';
-import Form from './common/form';
 import {Link} from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
 import Payment from './Payment';
 import AddAddress from './AddAddress';
 import { AiTwotonePhone } from 'react-icons/ai';
@@ -14,10 +12,14 @@ class Checkout extends Component {
   state = {
     currentUser: {},
   };
-
+  
   async componentDidMount() {
     const currentuser = JSON.parse(userService.getCurrentUser());
     this.setState({ currentUser: currentuser });
+  }
+
+  showAddressForm = () => {
+    console.log("show address clicked");
   }
 
   render() {
@@ -28,14 +30,19 @@ class Checkout extends Component {
       streetNo,
       streetName,
       phone,
-      country,
+      country
     } = this.props.address;
     return (
       <div className="checkout__container">
         <br/>
         <h1>Checkout</h1>
         <div className="form__container">
-          {this.props.address !== null ? (
+          
+          {/* for debugging */}
+          {/* {console.debug("props address: " + Object.keys(this.props.address.status).toString())} */}
+
+          {/* if server returns status 1 (no address stored), then show addAddress form, else display the address */}
+          {this.props.address.status == null ? (
             <div style={{ width: '100%', textAlign: 'center', marginTop: '100px'}}>
               <h4>Your Address</h4>
               <div style={{display: 'inline-block', textAlign: 'left'}}>
@@ -52,7 +59,8 @@ class Checkout extends Component {
               </h5>
 
               {/* <br/>
-              <h3 style={{ color: '#4a8cff'}}>- OR -</h3> */}
+              <h4 style={{ color: '#4a8cff'}}>- OR -</h4>
+              <br/> */}
               <br/>
             </div>
           ) : (
