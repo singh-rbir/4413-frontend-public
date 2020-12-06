@@ -48,10 +48,11 @@ class AddAdress extends Form {
         zip: zip,
         phone: phone,
       };
-      console.log(address);
+
       const result = await userService.addAddress(address);
-      console.log(result);
+
       if (result.data.status === 0) {
+        this.props.toggle();
         toast.success(`Address Added`, {
           position: 'top-center',
           autoClose: 5000,
@@ -107,7 +108,8 @@ class AddAdress extends Form {
               'Your Phone Number (10 digits)'
             )}
             {this.renderButton('Confirm Address')}
-            <ToastContainer
+
+            {/* <ToastContainer
               position="top-center"
               autoClose={5000}
               hideProgressBar={false}
@@ -118,7 +120,7 @@ class AddAdress extends Form {
               draggable
               pauseOnHover
               className="notification"
-            />
+            /> */}
           </div>
         </form>
       </div>

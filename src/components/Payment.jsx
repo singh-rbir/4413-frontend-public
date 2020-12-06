@@ -76,7 +76,7 @@ class Payment extends Form {
             {this.renderInput('cvv', 'CVV', 'Enter your CVV (3 digits)')}
             {this.renderButton('Confirm Payment')}
           </div>
-          <ToastContainer
+          {/* <ToastContainer
             position="top-center"
             autoClose={5000}
             hideProgressBar={false}
@@ -87,7 +87,7 @@ class Payment extends Form {
             draggable
             pauseOnHover
             className="notification"
-          />
+          /> */}
         </form>
       </div>
     );
