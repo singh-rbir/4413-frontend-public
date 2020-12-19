@@ -6,7 +6,7 @@
   
   https://4413-frontend.mybluemix.net/shop
 
-### Live application link (please give it some time to come out of hibernation):
+### Live backend (spring boot) link (please give it some time to come out of hibernation):
 
   https://backend-4413.herokuapp.com/
   
