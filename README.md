@@ -2,11 +2,11 @@
 
 - Contributors: Rajanbir Singh (me), Rushil Patel, Aman Patel
 
-#### Front End (which calls the above spring API) deployed at:
+#### Visit website at:
   
-  https://frontend-4413.herokuapp.com/shop
+  https://4413-frontend.mybluemix.net/shop
 
-### Live application link:
+### Live application link (please give it some time to come out of hibernation):
 
   https://backend-4413.herokuapp.com/
   
