@@ -1,5 +1,7 @@
 # 4413-Frontend
 
+- Contributors: Rajanbir Singh (me), Rushil Patel, Aman Patel
+
 #### Front End (which calls the above spring API) deployed at:
   
   https://frontend-4413.herokuapp.com/shop
