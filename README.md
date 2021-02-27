@@ -4,11 +4,11 @@
 
 #### Visit website at:
   
-  https://4413-frontend.mybluemix.net/shop
+  https://https://main.dg6br18dfokcj.amplifyapp.com/
 
-### Live backend (spring boot) link (please give it some time to come out of hibernation):
+### Live backend (spring boot) link (might need some time to come out of hibernation):
 
-  https://backend-4413.herokuapp.com/
+  https://backend-4413-live.herokuapp.com/
   
   <h1>Requirements to run React</h1>
   <ul>
